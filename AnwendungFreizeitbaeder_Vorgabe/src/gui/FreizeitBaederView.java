@@ -133,12 +133,27 @@ public class FreizeitBaederView {
 				zeigeFreizeitbaederAn();
 			}
 		});
+		mnItmCsvExport.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				schreibeFreizeitbaederInDatei("csv");
+			}
+		});
+		mnItmTxtExport.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				schreibeFreizeitbaederInDatei("txt");
+			}
+		});
+		
+		
 	}
 
 	private void nehmeFreizeitbadAuf() {
 		try {
 			this.freizeitbad = new Freizeitbad(txtName.getText(), txtGeoeffnetVon.getText(), txtGeoeffnetBis.getText(),
 					txtBeckenlaenge.getText(), txtWassTemperatur.getText());
+			freizeitBaederModel.setFreizeitbad(freizeitbad);
 			zeigeInformationsfensterAn("Das Freizeitbad wurde aufgenommen!");
 		} catch (PlausiException exc) {
 			zeigeFehlermeldungsfensterAn(exc.getPlausiTyp() + "er ", exc.getMessage());
@@ -159,6 +174,10 @@ public class FreizeitBaederView {
 
 	void zeigeFehlermeldungsfensterAn(String fehlertyp, String meldung) {
 		new MeldungsfensterAnzeiger(AlertType.ERROR, fehlertyp + "Fehler", meldung).zeigeMeldungsfensterAn();
+	}
+	
+	private void schreibeFreizeitbaederInDatei(String typ) {
+		freizeitBaederControler.schreibeFreizeitbaederInDatei(typ);
 	}
 
 }
