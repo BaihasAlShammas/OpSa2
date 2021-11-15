@@ -21,13 +21,21 @@ public class ConcreteTxtProduct extends Product {
 
 	@Override
 	public void fuegeInDateiHinzu(Object object) throws IOException {
-		
-		aus.write(((Freizeitbad)object).gibFreizeitbadZurueck("\n"));
+
+		Freizeitbad freizeitbad = (Freizeitbad) object;
+
+		String txtExport = "Daten des Freizeitbades:\n" + "Name des FreizeitBades: " + freizeitbad.getName() + "\n"
+				+ "Öffungszeit des FreiZeitbads: " + freizeitbad.getGeoeffnetVon() + " - "
+				+ freizeitbad.getGeoeffnetBis() + "\n" + "Beckenlänge des Freizeitbads: "
+				+ freizeitbad.getBeckenlaenge() + "\n" + "Wassertemperatur des Freizeitbades: "
+				+ freizeitbad.getTemperatur() + "\n";
+
+		aus.write(txtExport);
 	}
 
 	@Override
 	public void schliesseDatei() throws IOException {
-		
+
 		aus.close();
 	}
 
