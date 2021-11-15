@@ -21,6 +21,9 @@ public class FreizeitBaederControler {
 				freizeitBaederModel.SchreibeFreizeitBaederInVsvDatei();
 				freizeitBaederView.zeigeInformationsfensterAn("Wurde in csv Datei gespeichert");
 
+			} else if ("txt".equals(typ)) {
+				freizeitBaederModel.SchreibeFreizeitBaederInTxtDatei();
+				freizeitBaederView.zeigeInformationsfensterAn("Wurde in csv Datei gespeichert");
 			} else {
 				freizeitBaederView.zeigeInformationsfensterAn("Noch nihct implementiert");
 

@@ -162,7 +162,7 @@ public class FreizeitBaederView {
 
 	private void zeigeFreizeitbaederAn() {
 		if (this.freizeitbad != null) {
-			txtAnzeige.setText(this.freizeitbad.gibFreizeitbadZurueck(' '));
+			txtAnzeige.setText(this.freizeitbad.gibFreizeitbadZurueck(""));
 		} else {
 			zeigeInformationsfensterAn("Bisher wurde kein Freizeitbad aufgenommen!");
 		}

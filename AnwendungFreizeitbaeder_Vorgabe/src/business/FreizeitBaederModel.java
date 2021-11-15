@@ -4,9 +4,10 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import csvExport.ConcreteCerator;
-import csvExport.Creator;
-import csvExport.Product;
+import export.ConcreteCsvCerator;
+import export.ConcreteTxtCreator;
+import export.Creator;
+import export.Product;
 
 public class FreizeitBaederModel {
 
@@ -21,12 +22,22 @@ public class FreizeitBaederModel {
 	}
 
 	public void SchreibeFreizeitBaederInVsvDatei() throws IOException {
-		
-		Creator creator = new ConcreteCerator();
+
+		Creator creator = new ConcreteCsvCerator();
 		Product writer = creator.factoryMethod();
-		
-		writer.fuegeInDateihinzu(this.freizeitbad);
+
+		writer.fuegeInDateiHinzu(this.freizeitbad);
 		writer.schliesseDatei();
+	}
+
+	public void SchreibeFreizeitBaederInTxtDatei() throws IOException {
+
+		Creator creator = new ConcreteTxtCreator();
+		Product writer = creator.factoryMethod();
+
+		writer.fuegeInDateiHinzu(this.freizeitbad);
+		writer.schliesseDatei();
+
 	}
 
 }

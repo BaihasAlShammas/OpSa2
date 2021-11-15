@@ -89,7 +89,7 @@ public class Freizeitbad {
         return erg;
     }
            
-	public String gibFreizeitbadZurueck(char trenner){
+	public String gibFreizeitbadZurueck(String trenner){
   		return this.getName() + trenner 
   			+ this.getGeoeffnetVon() + trenner
   		    + this.getGeoeffnetBis() + trenner

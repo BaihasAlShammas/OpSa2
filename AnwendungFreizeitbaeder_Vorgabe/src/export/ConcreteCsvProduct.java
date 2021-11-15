@@ -1,4 +1,4 @@
-package csvExport;
+package export;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -6,11 +6,11 @@ import java.io.IOException;
 
 import business.Freizeitbad;
 
-public class ConcreteProduct extends Product {
+public class ConcreteCsvProduct extends Product {
 	
 	BufferedWriter aus;
 	
-	public ConcreteProduct() {
+	public ConcreteCsvProduct() {
 		try {
 			
 			aus = new BufferedWriter(new FileWriter("FreizeitBaeder.csv", true));
@@ -20,9 +20,9 @@ public class ConcreteProduct extends Product {
 	}
 
 	@Override
-	public void fuegeInDateihinzu(Object object) throws IOException {
+	public void fuegeInDateiHinzu(Object object) throws IOException {
 		
-		aus.write(((Freizeitbad)object).gibFreizeitbadZurueck(';'));
+		aus.write(((Freizeitbad)object).gibFreizeitbadZurueck(";"));
 	}
 
 	@Override
