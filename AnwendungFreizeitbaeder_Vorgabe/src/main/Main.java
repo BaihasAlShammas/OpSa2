@@ -1,7 +1,6 @@
 package main;
 
 import gui.FreizeitBaederControler;
-import gui.FreizeitbaederAnwendersystem;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
