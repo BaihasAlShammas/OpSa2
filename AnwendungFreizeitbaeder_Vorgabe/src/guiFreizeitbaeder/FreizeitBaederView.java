@@ -153,7 +153,6 @@ public class FreizeitBaederView {
 			this.freizeitbad = new Freizeitbad(txtName.getText(), txtGeoeffnetVon.getText(), txtGeoeffnetBis.getText(),
 					txtBeckenlaenge.getText(), txtWassTemperatur.getText());
 			freizeitBaederModel.setFreizeitbad(freizeitbad);
-			zeigeInformationsfensterAn("Das Freizeitbad wurde aufgenommen!");
 		} catch (PlausiException exc) {
 			zeigeFehlermeldungsfensterAn(exc.getPlausiTyp() + "er ", exc.getMessage());
 		}
