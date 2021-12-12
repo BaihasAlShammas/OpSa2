@@ -1,4 +1,4 @@
-package gui;
+package guiFreizeitbaeder;
 
 import business.FreizeitBaederModel;
 import business.Freizeitbad;
@@ -145,8 +145,7 @@ public class FreizeitBaederView {
 				schreibeFreizeitbaederInDatei("txt");
 			}
 		});
-		
-		
+
 	}
 
 	private void nehmeFreizeitbadAuf() {
@@ -160,7 +159,7 @@ public class FreizeitBaederView {
 		}
 	}
 
-	private void zeigeFreizeitbaederAn() {
+	void zeigeFreizeitbaederAn() {
 		if (this.freizeitbad != null) {
 			txtAnzeige.setText(this.freizeitbad.gibFreizeitbadZurueck(""));
 		} else {
@@ -175,7 +174,7 @@ public class FreizeitBaederView {
 	void zeigeFehlermeldungsfensterAn(String fehlertyp, String meldung) {
 		new MeldungsfensterAnzeiger(AlertType.ERROR, fehlertyp + "Fehler", meldung).zeigeMeldungsfensterAn();
 	}
-	
+
 	private void schreibeFreizeitbaederInDatei(String typ) {
 		freizeitBaederControler.schreibeFreizeitbaederInDatei(typ);
 	}

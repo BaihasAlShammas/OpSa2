@@ -1,17 +1,18 @@
-package gui;
+package guiFreizeitbaeder;
 
 import java.io.IOException;
 
 import business.FreizeitBaederModel;
 import javafx.stage.Stage;
 
-public class FreizeitBaederControler {
+public class FreizeitBaederControler implements observer.Observer {
 
 	private FreizeitBaederModel freizeitBaederModel;
 	private FreizeitBaederView freizeitBaederView;
 
 	public FreizeitBaederControler(Stage primaryStage) {
-		this.freizeitBaederModel = new FreizeitBaederModel();
+		this.freizeitBaederModel = FreizeitBaederModel.getTheInstance();
+		this.freizeitBaederModel.addObserver(this);
 		this.freizeitBaederView = new FreizeitBaederView(this, freizeitBaederModel, primaryStage);
 	}
 
@@ -33,6 +34,11 @@ public class FreizeitBaederControler {
 		} catch (Exception exc) {
 			freizeitBaederView.zeigeInformationsfensterAn("Unbekannter Fehler beim Speichern");
 		}
+	}
+
+	@Override
+	public void update() {
+		this.freizeitBaederView.zeigeFreizeitbaederAn();
 	}
 
 }
