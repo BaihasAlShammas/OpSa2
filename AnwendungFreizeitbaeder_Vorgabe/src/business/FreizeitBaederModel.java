@@ -10,7 +10,7 @@ import observer.Observer;
 
 public class FreizeitBaederModel implements observer.Observable {
 
-	private Freizeitbad freizeitbad;
+	private ArrayList<Freizeitbad> freizeitbaeder = new ArrayList<Freizeitbad>();
 	private static FreizeitBaederModel theInstance = null;
 	private ArrayList<Observer> observerss = new ArrayList<Observer>();
 
@@ -24,32 +24,40 @@ public class FreizeitBaederModel implements observer.Observable {
 		return theInstance;
 	}
 
-	public Freizeitbad getFreizeitbad() {
-		return freizeitbad;
+	public ArrayList<Freizeitbad> getFreizeitbaeder() {
+		return freizeitbaeder;
 	}
 
-	public void setFreizeitbad(Freizeitbad freizeitbad) {
-		this.freizeitbad = freizeitbad;
+	public void addFreizeitbad(Freizeitbad freizeitbad) {
+		freizeitbaeder.add(freizeitbad);
 		notifyObservers();
 	}
 
 	public void SchreibeFreizeitBaederInVsvDatei() throws IOException {
 
-		Creator creator = new ConcreteCsvCerator();
-		Product writer = creator.factoryMethod();
+		if (freizeitbaeder.size() > 0) {
+			Creator creator = new ConcreteCsvCerator();
+			Product writer = creator.factoryMethod();
 
-		writer.fuegeInDateiHinzu(this.freizeitbad);
-		writer.schliesseDatei();
+			for (Freizeitbad freizeitbad : freizeitbaeder) {
+				writer.fuegeInDateiHinzu(freizeitbad);
+			}
+			writer.schliesseDatei();
+		}
+
 	}
 
 	public void SchreibeFreizeitBaederInTxtDatei() throws IOException {
 
-		Creator creator = new ConcreteTxtCreator();
-		Product writer = creator.factoryMethod();
+		if (freizeitbaeder.size() > 0) {
+			Creator creator = new ConcreteTxtCreator();
+			Product writer = creator.factoryMethod();
 
-		writer.fuegeInDateiHinzu(this.freizeitbad);
-		writer.schliesseDatei();
-
+			for (Freizeitbad freizeitbad : freizeitbaeder) {
+				writer.fuegeInDateiHinzu(freizeitbad);
+			}
+			writer.schliesseDatei();
+		}
 	}
 
 	@Override

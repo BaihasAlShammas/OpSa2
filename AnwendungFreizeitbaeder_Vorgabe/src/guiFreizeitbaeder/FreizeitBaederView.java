@@ -133,34 +133,32 @@ public class FreizeitBaederView {
 				zeigeFreizeitbaederAn();
 			}
 		});
-		mnItmCsvExport.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				schreibeFreizeitbaederInDatei("csv");
-			}
-		});
-		mnItmTxtExport.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				schreibeFreizeitbaederInDatei("txt");
-			}
-		});
-
+		mnItmCsvExport.setOnAction(e -> schreibeFreizeitbaederInDatei("csv"));
+		mnItmTxtExport.setOnAction(e -> schreibeFreizeitbaederInDatei("txt"));
 	}
 
 	private void nehmeFreizeitbadAuf() {
 		try {
 			this.freizeitbad = new Freizeitbad(txtName.getText(), txtGeoeffnetVon.getText(), txtGeoeffnetBis.getText(),
 					txtBeckenlaenge.getText(), txtWassTemperatur.getText());
-			freizeitBaederModel.setFreizeitbad(freizeitbad);
+			freizeitBaederModel.addFreizeitbad(freizeitbad);
 		} catch (PlausiException exc) {
 			zeigeFehlermeldungsfensterAn(exc.getPlausiTyp() + "er ", exc.getMessage());
 		}
 	}
 
 	void zeigeFreizeitbaederAn() {
-		if (this.freizeitbad != null) {
-			txtAnzeige.setText(this.freizeitbad.gibFreizeitbadZurueck(""));
+
+		if (freizeitBaederModel.getFreizeitbaeder().size() > 0) {
+
+			StringBuffer text = new StringBuffer();
+
+			for (Freizeitbad fzb : freizeitBaederModel.getFreizeitbaeder()) {
+
+				text.append(fzb.gibFreizeitbadZurueck(" ") + "\n");
+			}
+			txtAnzeige.setText(text.toString());
+
 		} else {
 			zeigeInformationsfensterAn("Bisher wurde kein Freizeitbad aufgenommen!");
 		}

@@ -28,7 +28,7 @@ public class ConcreteTxtProduct extends Product {
 				+ "Öffungszeit des FreiZeitbads: " + freizeitbad.getGeoeffnetVon() + " - "
 				+ freizeitbad.getGeoeffnetBis() + "\n" + "Beckenlänge des Freizeitbads: "
 				+ freizeitbad.getBeckenlaenge() + "\n" + "Wassertemperatur des Freizeitbades: "
-				+ freizeitbad.getTemperatur() + "\n";
+				+ freizeitbad.getTemperatur();
 
 		aus.write(txtExport);
 	}

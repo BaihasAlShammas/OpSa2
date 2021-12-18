@@ -22,7 +22,7 @@ public class ConcreteCsvProduct extends Product {
 	@Override
 	public void fuegeInDateiHinzu(Object object) throws IOException {
 		
-		aus.write(((Freizeitbad)object).gibFreizeitbadZurueck(";"));
+		aus.write(((Freizeitbad)object).gibFreizeitbadZurueck(";")+"\n");
 	}
 
 	@Override
