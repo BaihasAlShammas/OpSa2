@@ -1,31 +1,9 @@
 Daten des Freizeitbades:
-Name des FreizeitBades: Firstq
-Öffungszeit des FreiZeitbads: 8.0 - 20.0
+Name des FreizeitBades: First
+Öffungszeit des FreiZeitbads: 11.0 - 12.0
+Beckenlänge des Freizeitbads: 25
+Wassertemperatur des Freizeitbades: 25Daten des Freizeitbades:
+Name des FreizeitBades: Second
+Öffungszeit des FreiZeitbads: 11.0 - 12.0
 Beckenlänge des Freizeitbads: 25
 Wassertemperatur des Freizeitbades: 25
-Daten des Freizeitbades:
-Name des FreizeitBades: Secondd
-Öffungszeit des FreiZeitbads: 8.3 - 20.3
-Beckenlänge des Freizeitbads: 24
-Wassertemperatur des Freizeitbades: 24
-Daten des Freizeitbades:
-Name des FreizeitBades: K
-Öffungszeit des FreiZeitbads: 11.0 - 12.0
-Beckenlänge des Freizeitbads: 11
-Wassertemperatur des Freizeitbades: 11
-\nDaten des Freizeitbades:
-Name des FreizeitBades: g
-Öffungszeit des FreiZeitbads: 11.0 - 12.0
-Beckenlänge des Freizeitbads: 11
-Wassertemperatur des Freizeitbades: 11
-\n
-Daten des Freizeitbades:
-Name des FreizeitBades: d
-Öffungszeit des FreiZeitbads: 11.0 - 12.0
-Beckenlänge des Freizeitbads: 11
-Wassertemperatur des Freizeitbades: 11
-Daten des Freizeitbades:
-Name des FreizeitBades: d
-Öffungszeit des FreiZeitbads: 11.0 - 12.0
-Beckenlänge des Freizeitbads: 11
-Wassertemperatur des Freizeitbades: 11
