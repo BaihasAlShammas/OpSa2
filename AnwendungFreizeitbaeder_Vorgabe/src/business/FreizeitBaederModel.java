@@ -13,9 +13,17 @@ public class FreizeitBaederModel implements observer.Observable {
 	private ArrayList<Freizeitbad> freizeitbaeder = new ArrayList<Freizeitbad>();
 	private static FreizeitBaederModel theInstance = null;
 	private ArrayList<Observer> observerss = new ArrayList<Observer>();
+	private static FreizeitBaederModel instanceModel;
 
 	private FreizeitBaederModel() {
 
+	}
+
+	public static FreizeitBaederModel getModel() {
+		if (instanceModel == null)
+			instanceModel = new FreizeitBaederModel();
+
+		return instanceModel;
 	}
 
 	public static FreizeitBaederModel getTheInstance() {

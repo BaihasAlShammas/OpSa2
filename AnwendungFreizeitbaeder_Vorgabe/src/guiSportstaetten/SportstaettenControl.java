@@ -1,20 +1,25 @@
 package guiSportstaetten;
 
 import business.FreizeitBaederModel;
+import business.businessSporthallen.SporthallenModel;
 import javafx.stage.Stage;
+import observer.Observer;
 
-public class SportstaettenControl implements observer.Observer {
-	private SportstaettenView sportstaettenView;
-	private FreizeitBaederModel freizeitbaederModel;
+public class SportstaettenControl implements Observer {
+	private SportstaettenView sportView;
+	private FreizeitBaederModel freiModel;
+	private SporthallenModel sporthallenModel;
 
-	public SportstaettenControl(Stage primaryStage) {
-		this.freizeitbaederModel = freizeitbaederModel.getTheInstance();
-		this.freizeitbaederModel.addObserver(this);
-		this.sportstaettenView = new SportstaettenView(this, primaryStage, freizeitbaederModel);
+	public SportstaettenControl(Stage fensterSportstaetten) {
+		this.freiModel = FreizeitBaederModel.getModel();
+		this.sporthallenModel = SporthallenModel.getModel();
+		this.sportView = new SportstaettenView(this, fensterSportstaetten, freiModel, sporthallenModel);
+		freiModel.addObserver(this);
 	}
 
 	@Override
 	public void update() {
-		sportstaettenView.zeigeFreizeitbaederAn();
+		sportView.zeigeFreizeitbaederAn();
 	}
+
 }

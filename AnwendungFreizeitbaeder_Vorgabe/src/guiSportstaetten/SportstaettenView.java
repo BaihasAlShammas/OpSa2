@@ -1,36 +1,51 @@
 package guiSportstaetten;
 
+import java.io.IOException;
+
 import business.FreizeitBaederModel;
 import business.Freizeitbad;
+import business.businessSporthallen.Sporthalle;
+import business.businessSporthallen.SporthallenModel;
 import javafx.event.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import ownUtil.*;
+import javafx.scene.control.Alert.AlertType;
 
 public class SportstaettenView {
 
-	private FreizeitBaederModel freizeitbaederModel;
-	private SportstaettenControl sportstaettenControl;
+	private FreizeitBaederModel freiModel;
+	private SporthallenModel sporthallenModel;
+	private SportstaettenControl sportControl;
 
 	// ---Anfang Attribute der grafischen Oberflaeche---
 	private Pane pane = new Pane();
-	private Label lblAnzeigeFreizeitbaeder = new Label("Anzeige Freizeitbäder");
+
+	private Label lblAnzeigeFreizeitbaeder = new Label("Anzeige Freizeitbï¿½der");
 	private TextArea txtAnzeigeFreizeitbaeder = new TextArea();
 	private Button btnAnzeigeFreizeitbaeder = new Button("Anzeige");
+
+	private Label lblAnzeigeSporthallen = new Label("Anzeige Sporthallen");
+	private TextArea txtAnzeigeSporthallen = new TextArea();
+	private Button btnAnzeigeSporthallen = new Button("CSV Import und Anzeige");
+
 	// -------Ende Attribute der grafischen Oberflaeche-------
 
-	public SportstaettenView(SportstaettenControl sportstaettenControl, Stage primaryStage,
-			FreizeitBaederModel freizeitbaederModel) {
+	public SportstaettenView(SportstaettenControl sportControl, Stage fenstersportstaetten,
+			FreizeitBaederModel freiModel, SporthallenModel sporthallenModel) {
 		Scene scene = new Scene(this.pane, 560, 340);
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Anzeige von Sportstätten");
-		primaryStage.show();
-		this.sportstaettenControl = sportstaettenControl;
-		this.freizeitbaederModel = freizeitbaederModel;
+		fenstersportstaetten.setScene(scene);
+		fenstersportstaetten.setTitle("Anzeige von Sportstï¿½tten");
+		fenstersportstaetten.setX(100);
+		fenstersportstaetten.show();
+
+		this.freiModel = freiModel;
+		this.sporthallenModel = sporthallenModel;
+		this.sportControl = sportControl;
+
 		this.initKomponenten();
 		this.initListener();
 	}
@@ -38,6 +53,8 @@ public class SportstaettenView {
 	private void initKomponenten() {
 		// Label
 		Font font = new Font("Arial", 20);
+		// Freizeitbaeder
+		// Label
 		lblAnzeigeFreizeitbaeder.setLayoutX(310);
 		lblAnzeigeFreizeitbaeder.setLayoutY(40);
 		lblAnzeigeFreizeitbaeder.setFont(font);
@@ -54,6 +71,24 @@ public class SportstaettenView {
 		btnAnzeigeFreizeitbaeder.setLayoutX(310);
 		btnAnzeigeFreizeitbaeder.setLayoutY(290);
 		pane.getChildren().add(btnAnzeigeFreizeitbaeder);
+
+		// Sporthallen
+		lblAnzeigeSporthallen.setLayoutX(20);
+		lblAnzeigeSporthallen.setLayoutY(40);
+		lblAnzeigeSporthallen.setFont(font);
+		lblAnzeigeSporthallen.setStyle("-fx-font-weight: bold;");
+		pane.getChildren().add(lblAnzeigeSporthallen);
+		// Textbereich
+		txtAnzeigeSporthallen.setEditable(false);
+		txtAnzeigeSporthallen.setLayoutX(20);
+		txtAnzeigeSporthallen.setLayoutY(90);
+		txtAnzeigeSporthallen.setPrefWidth(220);
+		txtAnzeigeSporthallen.setPrefHeight(185);
+		pane.getChildren().add(txtAnzeigeSporthallen);
+		// Button
+		btnAnzeigeSporthallen.setLayoutX(20);
+		btnAnzeigeSporthallen.setLayoutY(290);
+		pane.getChildren().add(btnAnzeigeSporthallen);
 	}
 
 	private void initListener() {
@@ -63,22 +98,47 @@ public class SportstaettenView {
 				zeigeFreizeitbaederAn();
 			}
 		});
+
+		btnAnzeigeSporthallen.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				try {
+					sporthallenModel.leseSporthallenAusCsvDatei();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					zeigeInformationsfensterAn("IO Exception");
+				} catch (PlausiException e1) {
+					// TODO Auto-generated catch block
+					zeigeInformationsfensterAn("PlusiException Exception");
+				}
+				zeigeSporthallenAn();
+			}
+		});
 	}
 
-	void zeigeFreizeitbaederAn() {
-
-		if (freizeitbaederModel.getFreizeitbaeder().size() > 0) {
-
+	public void zeigeFreizeitbaederAn() {
+		if (freiModel.getFreizeitbaeder().size() > 0) {
 			StringBuffer text = new StringBuffer();
 
-			for (Freizeitbad fzb : freizeitbaederModel.getFreizeitbaeder()) {
-
-				text.append(fzb.gibFreizeitbadZurueck(" ") + "\n");
+			for (Freizeitbad fzb : freiModel.getFreizeitbaeder()) {
+				text.append(fzb.gibFreizeitbadZurueck("") + "\n");
 			}
-			txtAnzeigeFreizeitbaeder.setText(text.toString());
-
+			this.txtAnzeigeFreizeitbaeder.setText(text.toString());
 		} else {
 			zeigeInformationsfensterAn("Bisher wurde kein Freizeitbad aufgenommen!");
+		}
+	}
+
+	public void zeigeSporthallenAn() {
+		if (sporthallenModel.getSporthallen().size() > 0) {
+			StringBuffer text = new StringBuffer();
+
+			for (Sporthalle sh : sporthallenModel.getSporthallen()) {
+				text.append(sh.gibSporthalleZurueck(' ') + "\n");
+			}
+			this.txtAnzeigeSporthallen.setText(text.toString());
+		} else {
+			zeigeInformationsfensterAn("Bisher wurde kein Sporthallen aufgenommen!");
 		}
 	}
 
