@@ -1,7 +1,5 @@
 package guiSportstaetten;
 
-import java.io.IOException;
-
 import business.FreizeitBaederModel;
 import business.Freizeitbad;
 import business.businessSporthallen.Sporthalle;
@@ -19,7 +17,7 @@ public class SportstaettenView {
 
 	private FreizeitBaederModel freiModel;
 	private SporthallenModel sporthallenModel;
-	private SportstaettenControl sportControl;
+	private SportstaettenControl sportstaettenControl;
 
 	// ---Anfang Attribute der grafischen Oberflaeche---
 	private Pane pane = new Pane();
@@ -44,17 +42,16 @@ public class SportstaettenView {
 
 		this.freiModel = freiModel;
 		this.sporthallenModel = sporthallenModel;
-		this.sportControl = sportControl;
+		this.sportstaettenControl = sportControl;
 
-		this.initKomponenten();
+		this.initKomponentenFreizeitbaeder();
+		initKomponentenSporthallen();
 		this.initListener();
 	}
 
-	private void initKomponenten() {
-		// Label
+	private void initKomponentenFreizeitbaeder() {
+
 		Font font = new Font("Arial", 20);
-		// Freizeitbaeder
-		// Label
 		lblAnzeigeFreizeitbaeder.setLayoutX(310);
 		lblAnzeigeFreizeitbaeder.setLayoutY(40);
 		lblAnzeigeFreizeitbaeder.setFont(font);
@@ -72,7 +69,11 @@ public class SportstaettenView {
 		btnAnzeigeFreizeitbaeder.setLayoutY(290);
 		pane.getChildren().add(btnAnzeigeFreizeitbaeder);
 
-		// Sporthallen
+	}
+
+	private void initKomponentenSporthallen() {
+
+		Font font = new Font("Arial", 20);
 		lblAnzeigeSporthallen.setLayoutX(20);
 		lblAnzeigeSporthallen.setLayoutY(40);
 		lblAnzeigeSporthallen.setFont(font);
@@ -102,15 +103,7 @@ public class SportstaettenView {
 		btnAnzeigeSporthallen.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				try {
-					sporthallenModel.leseSporthallenAusCsvDatei();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					zeigeInformationsfensterAn("IO Exception");
-				} catch (PlausiException e1) {
-					// TODO Auto-generated catch block
-					zeigeInformationsfensterAn("PlusiException Exception");
-				}
+				sportstaettenControl.leseSporthallenAusCsvDatei();
 				zeigeSporthallenAn();
 			}
 		});
@@ -142,7 +135,7 @@ public class SportstaettenView {
 		}
 	}
 
-	private void zeigeInformationsfensterAn(String meldung) {
+	public void zeigeInformationsfensterAn(String meldung) {
 		new MeldungsfensterAnzeiger(AlertType.INFORMATION, "Information", meldung).zeigeMeldungsfensterAn();
 	}
 

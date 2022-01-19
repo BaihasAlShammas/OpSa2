@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import business.businessSporthallen.Sporthalle;
 import ownUtil.PlausiException;
 
 public class SporthallenModel {
@@ -28,6 +27,7 @@ public class SporthallenModel {
 	}
 
 	public void leseSporthallenAusCsvDatei() throws IOException, PlausiException {
+
 		BufferedReader ein = new BufferedReader(new FileReader("Sporthallen.csv"));
 		ArrayList<Sporthalle> ergebnis = new ArrayList<>();
 		String zeileStr = ein.readLine();
@@ -36,6 +36,7 @@ public class SporthallenModel {
 			ergebnis.add(new Sporthalle(zeile[0], zeile[1], zeile[2]));
 			zeileStr = ein.readLine();
 		}
+
 		ein.close();
 		this.sporthallen = ergebnis;
 	}
